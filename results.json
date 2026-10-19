@@ -1,0 +1,53 @@
+[
+  {
+    "chunk_words": 50,
+    "overlap": 10,
+    "n_chunks": 52,
+    "hit@1": 0.5,
+    "hit@3": 0.917,
+    "mrr": 0.694,
+    "out_of_scope_refused": 1.0,
+    "n_questions": 24,
+    "n_out_of_scope": 6,
+    "misses": [
+      "Why do LLMs hallucinate?",
+      "Which vector databases are mentioned?"
+    ]
+  },
+  {
+    "chunk_words": 110,
+    "overlap": 25,
+    "n_chunks": 17,
+    "hit@1": 0.792,
+    "hit@3": 1.0,
+    "mrr": 0.889,
+    "out_of_scope_refused": 1.0,
+    "n_questions": 24,
+    "n_out_of_scope": 6,
+    "misses": []
+  },
+  {
+    "chunk_words": 200,
+    "overlap": 40,
+    "n_chunks": 8,
+    "hit@1": 0.833,
+    "hit@3": 1.0,
+    "mrr": 0.917,
+    "out_of_scope_refused": 1.0,
+    "n_questions": 24,
+    "n_out_of_scope": 6,
+    "misses": []
+  },
+  {
+    "chunk_words": 350,
+    "overlap": 60,
+    "n_chunks": 5,
+    "hit@1": 0.875,
+    "hit@3": 1.0,
+    "mrr": 0.938,
+    "out_of_scope_refused": 1.0,
+    "n_questions": 24,
+    "n_out_of_scope": 6,
+    "misses": []
+  }
+]

@@ -1,0 +1,67 @@
+Introduction to Natural Language Processing
+
+Natural Language Processing (NLP) is a field of artificial intelligence that enables computers to read, understand and generate human language. Common NLP tasks include text classification, sentiment analysis, named entity recognition, machine translation, question answering and text summarization. Early NLP systems relied on hand-written rules, later systems used statistical methods, and modern systems use deep neural networks.
+
+Tokenization
+
+Tokenization is the process of splitting raw text into smaller units called tokens. Tokens can be words, sub-words or characters. Modern language models use sub-word tokenization such as Byte Pair Encoding (BPE) and WordPiece. Sub-word tokenization keeps the vocabulary small while still handling rare and unknown words by breaking them into smaller known pieces. For example, the word "unhappiness" may be split into "un", "happi" and "ness".
+
+Word Embeddings
+
+An embedding is a dense vector of numbers that represents the meaning of a word or sentence. Words with similar meanings have embeddings that are close together in vector space. Classic embedding methods include Word2Vec and GloVe. Modern models produce contextual embeddings, where the same word gets a different vector depending on the sentence it appears in. Similarity between embeddings is usually measured with cosine similarity.
+
+The Transformer Architecture
+
+The Transformer is a neural network architecture introduced in the 2017 paper "Attention Is All You Need". It replaced recurrent networks (RNNs and LSTMs) because it processes all tokens in parallel and captures long-range dependencies better. A Transformer is built from stacked layers, each containing a multi-head self-attention block and a feed-forward network, with residual connections and layer normalization. Because attention has no built-in notion of order, positional encodings are added to the token embeddings.
+
+Self-Attention
+
+Self-attention lets every token in a sequence look at every other token and decide how much to focus on each. Each token is projected into three vectors: a query, a key and a value. The attention score between two tokens is the dot product of the query and key, scaled by the square root of the key dimension and passed through a softmax. The output is a weighted sum of the value vectors. Multi-head attention runs several attention operations in parallel so the model can capture different types of relationships at once.
+
+Large Language Models
+
+A Large Language Model (LLM) is a Transformer-based model with billions of parameters trained on huge amounts of text to predict the next token. Examples include GPT, Claude, Gemini and LLaMA. Most LLMs are decoder-only Transformers that generate text one token at a time. As models and datasets grow, LLMs show emergent abilities such as in-context learning, reasoning and following instructions.
+
+How LLMs Are Trained
+
+LLM training has several stages. In pre-training, the model learns language patterns by predicting the next token on a very large text corpus. In supervised fine-tuning (SFT), the model is trained on curated examples of instructions and good responses. In alignment, techniques such as Reinforcement Learning from Human Feedback (RLHF) or Direct Preference Optimization (DPO) are used to make the model more helpful, honest and safe according to human preferences.
+
+Prompt Engineering
+
+Prompt engineering is the practice of writing inputs that guide an LLM toward better outputs. Common techniques include zero-shot prompting, few-shot prompting where examples are given in the prompt, role prompting, and chain-of-thought prompting where the model is asked to reason step by step. Clear instructions, specified output formats and relevant context usually improve results.
+
+Temperature and Sampling
+
+When generating text, an LLM produces a probability distribution over the next token. Temperature controls randomness: a low temperature makes the output more deterministic and focused, while a high temperature makes it more creative and varied. Top-k sampling restricts choices to the k most likely tokens, and top-p (nucleus) sampling restricts choices to the smallest set of tokens whose cumulative probability exceeds p.
+
+Hallucination
+
+Hallucination is when an LLM produces text that sounds confident and fluent but is factually wrong or not supported by any source. It happens because LLMs predict plausible text rather than looking up verified facts, and their knowledge is frozen at the training cutoff. Hallucinations can be reduced by grounding the model in external documents, using Retrieval-Augmented Generation, lowering the temperature and asking the model to cite sources.
+
+Retrieval-Augmented Generation (RAG)
+
+Retrieval-Augmented Generation (RAG) combines a retrieval system with an LLM. When a user asks a question, the system first retrieves the most relevant passages from an external knowledge base and then passes them to the LLM as context so the answer is grounded in real documents. RAG reduces hallucination, lets the model use up-to-date or private data without retraining, and makes it possible to show the sources behind an answer.
+
+The RAG Pipeline
+
+A typical RAG pipeline has two phases. In the indexing phase, documents are loaded, split into chunks, converted into embeddings and stored in a vector database such as FAISS or Chroma. In the query phase, the user question is embedded, the top-k most similar chunks are retrieved, the chunks are inserted into a prompt together with the question, and the LLM writes the final answer. Chunk size and overlap are important settings: chunks that are too small lose context, and chunks that are too large add noise.
+
+Vector Databases and Search
+
+A vector database stores embeddings and supports fast nearest-neighbour search. FAISS is a library from Meta for efficient similarity search over dense vectors. Chroma is an open-source embedding database designed for LLM applications. Instead of dense vectors, classic keyword search can use TF-IDF or BM25, which score documents by how often query terms appear and how rare those terms are across the collection. Hybrid search combines keyword and vector search.
+
+AI Agents
+
+An AI agent is a system in which an LLM decides what actions to take to reach a goal. The agent can call tools such as web search, calculators, databases or code interpreters, observe the results, and continue until the task is done. A common pattern is ReAct, where the model alternates between reasoning about what to do and acting by calling a tool. Agents also usually have memory to keep track of earlier steps.
+
+Multi-Agent Systems
+
+A Multi-Agent System (MAS) uses several specialised agents that collaborate on a task. For example, one agent may search for information, another may summarise it and a third may write the final report. Splitting work between agents makes each prompt simpler and lets each agent specialise, but it adds cost, latency and the need for coordination. Frameworks such as LangGraph, CrewAI and AutoGen help build multi-agent workflows.
+
+Evaluating LLM Applications
+
+LLM applications are evaluated on both retrieval quality and answer quality. For retrieval, common metrics are hit rate (whether the correct passage appears in the top-k results) and mean reciprocal rank (MRR). For answers, important criteria are faithfulness (the answer is supported by the retrieved context), relevance (the answer addresses the question) and correctness. Human review and LLM-as-a-judge methods are often used together.
+
+Fine-Tuning versus RAG
+
+Fine-tuning changes the model weights by training on extra data, and is best for teaching a style, format or specialised behaviour. RAG leaves the model unchanged and supplies knowledge at query time, which is better for facts that change often and for citing sources. Fine-tuning is more expensive and harder to update, while RAG is cheaper and easier to keep current. Many production systems combine both.
